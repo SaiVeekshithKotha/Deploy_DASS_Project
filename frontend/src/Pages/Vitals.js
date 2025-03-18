@@ -22,10 +22,12 @@ function Vitals() {
     setFormData({ ...formData, [name]: value });
   };
 
+  const PORT = process.env.PORT || 5002;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://deploy-dass-project-backend.onrender.com/api/vitals', {
+      const response = await axios.post(`http://localhost:${PORT}/api/vitals`, {
         book_no: formData.bookNumber,
         rbs: formData.rbs || null,
         bp: formData.bp || null,

@@ -7,9 +7,11 @@ function ViewPatients() {
     const [patients, setPatients] = useState([]);
     const navigate = useNavigate();
 
+    const PORT = process.env.PORT || 5002;
+
     useEffect(() => {
         axios
-            .get("https://deploy-dass-project-backend.onrender.com/api/admin/get_patients")
+            .get(`http://localhost:${PORT}/api/admin/get_patients`)
             .then((response) => {
                 setPatients(response.data);
             })

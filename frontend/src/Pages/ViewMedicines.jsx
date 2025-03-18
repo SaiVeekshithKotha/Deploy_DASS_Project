@@ -6,10 +6,11 @@ import '../Styles/ViewMedicines.css'
 function ViewPatients() {
     const navigate = useNavigate();
     const [medicines, setMedicines] = useState([]);
+    const PORT = process.env.PORT || 5002;
 
     useEffect(() => {
         axios
-            .get("https://deploy-dass-project-backend.onrender.com/api/admin/get_medicines")
+            .get(`http://localhost:${PORT}/api/admin/get_medicines`)
             .then((response) => {
                 setMedicines(response.data);
             })
