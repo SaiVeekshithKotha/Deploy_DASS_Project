@@ -18,7 +18,7 @@ function MedicineVerification() {
 
     try {
       const response = await axios.get(
-        `http://localhost:5002/api/patient-history/medicine-verification/${bookNo}`
+        `https://deploy-dass-project-backend.onrender.com/api/patient-history/medicine-verification/${bookNo}`
       );
       setMedicinesGiven(response.data.medicines_given);
     } catch (err) {

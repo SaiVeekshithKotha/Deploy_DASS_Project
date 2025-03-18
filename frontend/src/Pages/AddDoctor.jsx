@@ -308,7 +308,7 @@ function Doctor() {
         
         setIsLoading(true);
         
-        axios.post('http://localhost:5002/api/admin/add_doctor', formData)
+        axios.post('https://deploy-dass-project-backend.onrender.com/api/admin/add_doctor', formData)
             .then((response) => {
                 if (response.data) {
                     // Reset form

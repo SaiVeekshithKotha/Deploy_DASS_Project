@@ -26,7 +26,7 @@ function PatientRegistration() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5002/api/patients', {
+      const response = await axios.post('https://deploy-dass-project-backend.onrender.com/api/patients', {
         book_no: formData.bookNumber,
         patient_name: formData.name,
         patient_age: formData.age,

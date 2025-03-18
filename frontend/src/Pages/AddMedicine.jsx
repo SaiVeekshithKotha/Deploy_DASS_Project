@@ -31,7 +31,7 @@ function AddMedicine() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5002/api/admin/add_new_medicine",
+        "https://deploy-dass-project-backend.onrender.com/api/admin/add_new_medicine",
         formData
       );
 

@@ -7,7 +7,7 @@ function ViewDoctors() {
     const [doctors , setDoctors] = useState([]) ;
 
     useEffect( () => {
-        axios.get('http://localhost:5002/api/admin/get_doctors')
+        axios.get('https://deploy-dass-project-backend.onrender.com/api/admin/get_doctors')
         .then(response => {
             console.log(response.data);
             setDoctors(response.data);

@@ -17,7 +17,7 @@ function DoctorAssigning() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5002/api/doctor-assign', {
+      const response = await axios.post('https://deploy-dass-project-backend.onrender.com/api/doctor-assign', {
         book_no: formData.bookNumber,
         doc_name: formData.doc_name,
       });

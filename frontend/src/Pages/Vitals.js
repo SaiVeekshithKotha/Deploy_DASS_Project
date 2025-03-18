@@ -25,7 +25,7 @@ function Vitals() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5002/api/vitals', {
+      const response = await axios.post('https://deploy-dass-project-backend.onrender.com/api/vitals', {
         book_no: formData.bookNumber,
         rbs: formData.rbs || null,
         bp: formData.bp || null,

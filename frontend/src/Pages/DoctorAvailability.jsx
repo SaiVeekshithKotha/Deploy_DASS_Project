@@ -8,7 +8,7 @@ function DoctorAvailability() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get('http://localhost:5002/api/admin/get_doctors')
+        axios.get('https://deploy-dass-project-backend.onrender.com/api/admin/get_doctors')
             .then((response) => {
                 setDoctorList(response.data);
             })
@@ -20,7 +20,7 @@ function DoctorAvailability() {
     const toggleDoctorAvailability = (id) => {
         const doctor = doctorList.find((doc) => doc._id === id);
         const updatedAvailability = !doctor.doctor_availability;
-        axios.put(`http://localhost:5002/api/admin/update_doctor_availability/${id}`, { doctor_availability: updatedAvailability })
+        axios.put(`https://deploy-dass-project-backend.onrender.com/api/admin/update_doctor_availability/${id}`, { doctor_availability: updatedAvailability })
             .then((response) => {
                 setDoctorList(doctorList.map((doc) =>
                     doc._id === id ? response.data : doc

@@ -55,7 +55,7 @@ function DoctorPrescription() {
     };
 
     try {
-      const response = await fetch('http://localhost:5002/api/patient-history/doctor-prescription', {
+      const response = await fetch('https://deploy-dass-project-backend.onrender.com/api/patient-history/doctor-prescription', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

@@ -9,7 +9,7 @@ function ViewPatients() {
 
     useEffect(() => {
         axios
-            .get("http://localhost:5002/api/admin/get_medicines")
+            .get("https://deploy-dass-project-backend.onrender.com/api/admin/get_medicines")
             .then((response) => {
                 setMedicines(response.data);
             })

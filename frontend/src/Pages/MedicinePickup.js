@@ -22,7 +22,7 @@ function MedicinePickup() {
   
     try {
       const response = await axios.get(
-        `http://localhost:5002/api/patient-history/medicine-pickup/${bookNo}`
+        `https://deploy-dass-project-backend.onrender.com/api/patient-history/medicine-pickup/${bookNo}`
       );
       
       if (!response.data.medicines_prescribed || response.data.medicines_prescribed.length === 0) {
@@ -53,7 +53,7 @@ function MedicinePickup() {
 
     try {
       const response = await axios.post(
-        'http://localhost:5002/api/patient-history/medicine-pickup',
+        'https://deploy-dass-project-backend.onrender.com/api/patient-history/medicine-pickup',
         {
           book_no: bookNo,
           medicinesGiven: givenMeds,

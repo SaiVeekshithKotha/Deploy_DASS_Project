@@ -10,7 +10,7 @@ const AdminLogin = () => {
 
   const handleAdminLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:5002/api/admin/login', { user_name, user_password, user_type: 'admin' });
+      const response = await axios.post('https://deploy-dass-project-backend.onrender.com/api/admin/login', { user_name, user_password, user_type: 'admin' });
       if (response.status === 200) {
         localStorage.setItem('authToken', response.data.token);
         navigate('/dashboard-admin');
