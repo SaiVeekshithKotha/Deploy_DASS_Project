@@ -1,0 +1,154 @@
+.medicine-pickup-container {
+  background-color: #fff;
+  max-width: 600px;
+  margin: 35px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+.medicine-pickup-card{
+  margin: 0px 100px 0px;
+}
+
+.medicine-pickup-title {
+  color: #333;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.medicine-pickup-success-msg {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #c3e6cb;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.medicine-pickup-error-msg {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.medicine-pickup-form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.medicine-pickup-form-group {
+  margin-bottom: 15px;
+}
+
+.medicine-pickup-form-group label {
+  display: block;
+  margin-bottom: 3px;
+  color: #333;
+  font-weight: bold;
+}
+
+.medicine-pickup-form-group input[type="text"] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.medicine-pickup-btn-container {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.medicine-pickup-fetch-btn,
+.medicine-pickup-submit-btn {
+  width: 100%;
+  background-color: #33b48b;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 15px;
+}
+
+.medicine-pickup-fetch-btn:hover,
+.medicine-pickup-submit-btn:hover {
+  background-color: #2a9d7a;
+}
+
+.medicine-pickup-row {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.medicine-pickup-checkbox-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+  white-space: nowrap;
+}
+
+.medicine-pickup-checkbox-group label {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.medicine-pickup-checkbox-group input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.medicine-pickup-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+}
+
+.medicine-pickup-popup {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.medicine-pickup-close-popup {
+  width: 100%;
+  background-color: #33b48b;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 15px;
+}
+
+.medicine-pickup-close-popup:hover {
+  background-color: #2a9d7a;
+}

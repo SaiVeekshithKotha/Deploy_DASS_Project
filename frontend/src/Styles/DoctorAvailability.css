@@ -1,0 +1,104 @@
+.doctor-availability-container {
+  background-color: #fff;
+  max-width: 800px;
+  margin: 35px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+.doctor-availability-header {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.doctor-availability-header h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.doctor-availability-main {
+  margin-top: 20px;
+}
+
+.doctor-availability-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.doctor-availability-card {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.doctor-availability-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.doctor-name {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.doctor-specialization,
+.doctor-email,
+.doctor-phone {
+  font-size: 1rem;
+  margin: 5px 0;
+  color: #333;
+}
+
+.doctor-availability-status {
+  margin: 10px 0;
+  padding: 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  color: #000;
+}
+
+.doctor-availability-status.available {
+  color: #4CAF50;
+}
+
+.doctor-availability-status.unavailable {
+  color: #E53935;
+}
+
+.doctor-availability-button {
+  width: 100%;
+  background-color: #33b48b;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.doctor-availability-button:hover {
+  background-color: #2a9d7a;
+}
+
+.no-doctors-message {
+  text-align: center;
+  font-size: 1rem;
+  color: #333;
+  margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+  .doctor-availability-grid {
+    grid-template-columns: 1fr;
+  }
+}
