@@ -1,10 +1,9 @@
 .patient-registration-container {
-  background-color: #fff;
+  background-color: #f5f5f5;
   max-width: 600px;
   margin: 35px auto;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   font-family: 'Arial', sans-serif;
 }
 
@@ -15,8 +14,8 @@
 }
 
 .patient-registration-success-msg {
-  background-color: #d4edda;
-  color: #155724;
+  background: #66bca15d;
+  color: #176101;
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #c3e6cb;
@@ -25,7 +24,7 @@
 }
 
 .patient-registration-error-msg {
-  background-color: #f8d7da;
+  background-color: #fb9ea6;
   color: #721c24;
   padding: 10px;
   margin-bottom: 15px;
@@ -62,7 +61,7 @@
 
 .patient-registration-radio-group {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
   gap: 5px;
   margin-top: 5px;
@@ -82,7 +81,7 @@
 
 .patient-registration-submit-btn {
   width: 100%;
-  background-color: #33b48b;
+  background-color: #373737;
   color: #fff;
   padding: 10px;
   border: none;
@@ -94,7 +93,7 @@
 }
 
 .patient-registration-submit-btn:hover {
-  background-color: #2a9d7a;
+  background-color: #0c0c0c;
 }
 
 @media screen and (max-width: 600px) {
