@@ -1,4 +1,5 @@
-.add-medicine-page {
+/* AddVolunteer.css */
+.add-volunteer-container {
   background-color: #fff;
   max-width: 600px;
   margin: 35px auto;
@@ -9,7 +10,7 @@
   color: #000;
 }
 
-.add-medicine-page h2 {
+.add-volunteer-container h2 {
   text-align: center;
   margin-bottom: 25px;
   font-size: 1.8rem;
@@ -17,7 +18,7 @@
   color: #000;
 }
 
-.add-medicine-error {
+.add-volunteer-error {
   background-color: #f8d7da;
   color: #000;
   padding: 10px;
@@ -27,7 +28,7 @@
   text-align: center;
 }
 
-.add-medicine-success {
+.add-volunteer-success {
   background-color: #d4edda;
   color: #000;
   padding: 10px;
@@ -37,23 +38,23 @@
   text-align: center;
 }
 
-.add-medicine-form {
+.add-volunteer-form {
   max-width: 400px;
   margin: 0 auto;
 }
 
-.add-medicine-group {
+.add-volunteer-group {
   margin-bottom: 15px;
 }
 
-.add-medicine-group label {
+.add-volunteer-group label {
   display: block;
   margin-bottom: 3px;
   color: #000;
   font-weight: bold;
 }
 
-.add-medicine-group input {
+.add-volunteer-group input {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
@@ -63,13 +64,13 @@
   box-sizing: border-box;
 }
 
-.add-medicine-actions {
+.add-volunteer-actions {
   text-align: center;
   margin-top: 15px;
 }
 
-.add-medicine-cancel,
-.add-medicine-submit {
+.add-volunteer-cancel,
+.add-volunteer-submit {
   width: 100%;
   background-color: #33b48b;
   color: #fff;
@@ -83,29 +84,29 @@
   display: inline-block;
 }
 
-.add-medicine-cancel:hover,
-.add-medicine-submit:hover {
+.add-volunteer-cancel:hover,
+.add-volunteer-submit:hover {
   background-color: #2a9d7a;
 }
 
 @media screen and (max-width: 600px) {
-  .add-medicine-page {
+  .add-volunteer-container {
     margin: 20px 10px;
     padding: 15px;
   }
 
-  .add-medicine-form {
+  .add-volunteer-form {
     max-width: 100%;
     padding: 0 10px;
   }
 
-  .add-medicine-group input {
+  .add-volunteer-group input {
     font-size: 0.95rem;
     padding: 7px;
   }
 
-  .add-medicine-submit,
-  .add-medicine-cancel {
+  .add-volunteer-cancel,
+  .add-volunteer-submit {
     font-size: 0.95rem;
     padding: 9px;
   }

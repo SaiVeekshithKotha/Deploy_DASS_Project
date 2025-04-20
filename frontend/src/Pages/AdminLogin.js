@@ -1,46 +1,104 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
+import { publicAxios } from '../api/axios';
 import '../Styles/Login.css';
 
 const AdminLogin = () => {
   const [user_name, setUserName] = useState('');
   const [user_password, setUserPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const PORT = process.env.PORT || 5002;
+  
+  // const BACKEND_URL = process.env.REACT_APP_BACKEND || 'http://localhost:5002';
 
-  const handleAdminLogin = async () => {
+  useEffect(() => {
+    // Check for auth token and user type when component mounts
+    const authToken = localStorage.getItem('authToken');
+    const userType = localStorage.getItem('userType');
+    
+    if (authToken) {
+      // Redirect based on user type
+      if (userType === 'admin') {
+        navigate('/dashboard-admin');
+      } else if (userType === 'volunteer') {
+        navigate('/dashboard');
+      }
+    }
+  }, [navigate]);
+
+  const handleAdminLogin = async (e) => {
+    e.preventDefault();
+    
+    if (!user_name || !user_password) {
+      setError('Please enter both username and password');
+      return;
+    }
+    
+    setError('');
+    setIsLoading(true);
+    
     try {
-      const response = await axios.post(`${process.env.REACT_APP_BACKEND}/api/admin/login`, { user_name, user_password, user_type: 'admin' });
-      if (response.status === 200) {
+      // const response = await axios.post(`${BACKEND_URL}/api/auth/login`, {
+      //   user_name,
+      //   user_password,
+      //   user_type: 'admin'
+      // });
+      const response = await publicAxios.post('/api/auth/login', {
+        user_name,
+        user_password,
+        user_type: 'admin'
+      });
+      
+      if (response.data.token) {
         localStorage.setItem('authToken', response.data.token);
+        localStorage.setItem('userType', 'admin');
         navigate('/dashboard-admin');
       } else {
-        alert('Invalid credentials');
+        setError('Login failed. Please check your credentials.');
       }
     } catch (error) {
-      alert('Server error');
+      if (error.response && error.response.status === 401) {
+        setError('Invalid username or password');
+      } else if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setError('Server error. Please try again later.');
+      }
+      console.error('Login error:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <div className="login-container">
       <h2 className="login-title">Admin Login</h2>
-      <div className="login-admin-form">
+      <form className="login-admin-form" onSubmit={handleAdminLogin}>
+        {error && <div className="error-message">{error}</div>}
         <input
           type="text"
           placeholder="Username"
           value={user_name}
           onChange={(e) => setUserName(e.target.value)}
+          required
         />
         <input
           type="password"
           placeholder="Password"
           value={user_password}
           onChange={(e) => setUserPassword(e.target.value)}
+          required
         />
-        <button onClick={handleAdminLogin} className="login-submit-btn">Submit</button>
-      </div>
+        <button 
+          type="submit" 
+          className="login-button"
+          disabled={isLoading}
+        >
+          {isLoading ? 'Logging in...' : 'Login'}
+        </button>
+      </form>
     </div>
   );
 };

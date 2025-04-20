@@ -1,64 +1,137 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import "../Styles/Navbar.css";
 import SwechaLogo from "./SwechaLogo.png";
+import { privateAxios } from '../api/axios';
 
 const Navbar = () => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userType, setUserType] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const adminLinks = [
-    { path: '/dashboard-admin', label: 'Admin Dashboard' },
-    { path: '/doctor-availability', label: 'Doctor Availability' },
-    { path: '/add-doctor', label: 'Add Doctor' },
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    const type = localStorage.getItem('userType');
+    setIsLoggedIn(!!token);
+    setUserType(type);
+    setMenuOpen(false); // close menu on navigation
+  }, [pathname]);
+
+  const handleLogout = async () => {
+    await privateAxios.post('/api/logs', { action: 'Logout' });
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userType');
+    navigate('/');
+  };
+
+  const ADMIN_DASH = '/dashboard-admin';
+  const VOLUNTEER_DASH = '/dashboard';
+
+  const showMenuIcon =
+    isLoggedIn &&
+    (userType === 'admin' || userType === 'volunteer') &&
+    pathname !== ADMIN_DASH &&
+    pathname !== VOLUNTEER_DASH;
+
+  const adminNavLinks = [
+    { path: ADMIN_DASH,             label: 'Admin Dashboard' },
+    { path: '/doctor-availability',label: 'Doctor Availability' },
+    { path: '/add-doctor',          label: 'Add Doctor' },
     { path: '/update-medicine-stock', label: 'Update Medicine Stock' },
-    { path: '/add-new-medicine', label: 'Add New Medicine' },
-    {path: '/get-doctors', label: 'View Doctors'},
-    { path: '/view-patients', label: 'View Patients' },
-    { path: '/get-medicines', label: 'View Medicines' },
+    { path: '/add-new-medicine',    label: 'Add New Medicine' },
+    { path: '/get-doctors',         label: 'View Doctors',    menuOnly: true },
+    { path: '/get-medicines',       label: 'View Medicines',  menuOnly: true },
+    { path: '/get-volunteers',      label: 'View Volunteers', menuOnly: true },
+    { path: '/view-patients',      label: 'View Patients', menuOnly: true },
+    { path: '/view-logs',      label: 'View Logs', menuOnly: true },
+    { path: '/analytics',      label: 'Camp Analytics'},
+    { path: '/add-volunteer',       label: 'Add Volunteer' },
   ];
 
-  const userLinks = [
-    { path: '/dashboard', label: 'Dashboard' },
+  const volunteerNavLinks = [
+    { path: VOLUNTEER_DASH,          label: 'Volunteer Dashboard' },
     { path: '/patient-registration', label: 'Patient Registration' },
-    { path: '/vitals', label: 'Vitals' },
-    { path: '/doctor-assigning', label: 'Doctor Assigning' },
-    { path: '/doctor-prescription', label: 'Doctor Prescription' },
-    { path: '/medicine-pickup', label: 'Medicine Pickup' },
-    { path: '/medicine-verification', label: 'Medicine Verification' },
+    { path: '/vitals',               label: 'Vitals' },
+    { path: '/doctor-assigning',     label: 'Doctor Assigning',    menuOnly: true },
+    { path: '/doctor-assigning-automatic',     label: 'Doctor Assigning Automatic',    menuOnly: true },
+    { path: '/view-queue',  label: 'View Queues', menuOnly: true },
+    { path: '/doctor-prescription',  label: 'Doctor Prescription', menuOnly: true },
+    { path: '/medicine-pickup',      label: 'Medicine Pickup',     menuOnly: true },
   ];
-
-  if (pathname === '/dashboard' || pathname === '/dashboard-admin') {
-    return (
-      <nav className="navbar">
-        <div className="logo">
-          <Link to="/"><img src={SwechaLogo} alt="Swecha Logo" className="logo-img" /></Link>
-        </div>
-      </nav>
-    );
-  }
-
-  const adminPages = adminLinks.map(link => link.path);
-  const userPages = userLinks.map(link => link.path);
 
   let linksToDisplay = [];
-  if (adminPages.includes(pathname)) {
-    linksToDisplay = adminLinks;
-  } else if (userPages.includes(pathname)) {
-    linksToDisplay = userLinks;
+  if (isLoggedIn && userType === 'admin') {
+    linksToDisplay = pathname === ADMIN_DASH ? [] : adminNavLinks;
+  } else if (isLoggedIn && userType === 'volunteer') {
+    linksToDisplay = pathname === VOLUNTEER_DASH ? [] : volunteerNavLinks;
   }
+
+  const mainLinks = linksToDisplay.filter(l => !l.menuOnly);
+  const menuLinks = linksToDisplay.filter(l => l.menuOnly);
 
   return (
     <nav className="navbar">
       <div className="logo">
-        <Link to="/"><img src={SwechaLogo} alt="Swecha Logo" className="logo-img" /></Link>
+        <Link to="/">
+          <img src={SwechaLogo} alt="Swecha Logo" className="logo-img" />
+        </Link>
       </div>
-      <ul className="nav-links">
-        {linksToDisplay.map((link, index) => (
-          <li key={index}>
-            <Link to={link.path}>{link.label}</Link>
-          </li>
-        ))}
-      </ul>
+
+      {/* wrap all link elements so we can push them right of logo but left of logout */}
+      <div className="nav-group">
+        {/* desktop inline links */}
+        <ul className="desktop-links">
+          {mainLinks.map((link, idx) => (
+            <li key={idx}>
+              <Link to={link.path}>{link.label}</Link>
+            </li>
+          ))}
+        </ul>
+
+        {/* original mobile dropdown */}
+        <ul className={`nav-links${menuOpen ? ' open' : ''}`}>
+          {linksToDisplay.map((link, idx) => (
+            <li key={idx}>
+              <Link to={link.path} onClick={() => setMenuOpen(false)}>
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        {showMenuIcon && (
+          <>
+            <button
+              className="menu-icon"
+              onClick={() => setMenuOpen(o => !o)}
+              aria-label="Toggle menu"
+            >
+              ☰
+            </button>
+
+            {/* desktop‑only dropdown (no bullets) */}
+            <ul className={`desktop-menu${menuOpen ? ' open' : ''}`}>
+              {menuLinks.map((link, idx) => (
+                <li key={idx}>
+                  <Link to={link.path} onClick={() => setMenuOpen(false)}>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+      </div>
+
+      {isLoggedIn && (
+        <div className="logout-container">
+          <button className="logout-btn" onClick={handleLogout}>
+            Logout
+          </button>
+        </div>
+      )}
     </nav>
   );
 };

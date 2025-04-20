@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
+import { privateAxios } from '../api/axios';
 import '../Styles/Vitals.css';
 
 function Vitals() {
   const [formData, setFormData] = useState({
-    book_no: '',
+    bookNumber: '',
     bp: '',
     pulse: '',
     rbs: '',
@@ -27,7 +28,8 @@ function Vitals() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${process.env.REACT_APP_BACKEND}/api/vitals`, {
+      // const response = await axios.post(`${process.env.REACT_APP_BACKEND}/api/vitals`, {
+      const response = await privateAxios.post('/api/vitals', {
         book_no: formData.bookNumber,
         rbs: formData.rbs || null,
         bp: formData.bp || null,
@@ -38,6 +40,15 @@ function Vitals() {
       });
       setMessage(response.data.message || 'Vitals recorded successfully!');
       setError('');
+      setFormData({
+        bookNumber: '',
+        bp: '',
+        pulse: '',
+        rbs: '',
+        weight: '',
+        height: '',
+        extra_note: ''
+      });
       window.scrollTo(0, 0);
     } catch (error) {
       setError(error.response?.data?.message || 'An error occurred');

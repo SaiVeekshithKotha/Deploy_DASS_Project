@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
+// import axios from "axios";
+import { privateAxios } from "../api/axios";
 import { useNavigate } from "react-router-dom";
 import '../Styles/Doctor.css';
 
@@ -16,45 +17,59 @@ function AddDoctor() {
         specialization: '',
         doctor_sex: ''
     });
-    
+
     const handleInputChange = (e) => {
         const { id, value } = e.target;
         setFormData({
             ...formData,
-            [id === 'addDoctorName' ? 'doctor_name' : 
-             id === 'addDoctorEmail' ? 'doctor_email' :
-             id === 'addDoctorPhone' ? 'doctor_phone_no' :
-             id === 'addDoctorAge' ? 'doctor_age' :
-             id === 'addDoctorSpecialization' ? 'specialization' :
-             id === 'addDoctorSex' ? 'doctor_sex' : id]: value
+            [id === 'addDoctorName' ? 'doctor_name' :
+                id === 'addDoctorEmail' ? 'doctor_email' :
+                    id === 'addDoctorPhone' ? 'doctor_phone_no' :
+                        id === 'addDoctorAge' ? 'doctor_age' :
+                            id === 'addDoctorSpecialization' ? 'specialization' :
+                                id === 'addDoctorSex' ? 'doctor_sex' : id]: value
         });
     };
-    
+
+    // const validateForm = () => {
+    //     if (!formData.doctor_name) return "Doctor name is required";
+    //     if (!formData.doctor_email) return "Email is required";
+    //     if (!/\S+@\S+\.\S+/.test(formData.doctor_email)) return "Email is invalid";
+    //     if (!formData.doctor_phone_no) return "Phone number is required";
+    //     if (!formData.doctor_age) return "Age is required";
+    //     if (!formData.specialization) return "Specialization is required";
+    //     if (!formData.doctor_sex) return "Sex is required";
+    //     return "";
+    // };
+
     const validateForm = () => {
         if (!formData.doctor_name) return "Doctor name is required";
-        if (!formData.doctor_email) return "Email is required";
-        if (!/\S+@\S+\.\S+/.test(formData.doctor_email)) return "Email is invalid";
         if (!formData.doctor_phone_no) return "Phone number is required";
-        if (!formData.doctor_age) return "Age is required";
-        if (!formData.specialization) return "Specialization is required";
-        if (!formData.doctor_sex) return "Sex is required";
+        // if (!formData.specialization) return "Specialization is required";
+
+        // Check email format only if email is provided
+        if (formData.doctor_email && !/\S+@\S+\.\S+/.test(formData.doctor_email)) {
+            return "Email is invalid";
+        }
+
         return "";
     };
-    
+
     const addDoctor = () => {
         setError('');
-        
+
         const validationError = validateForm();
         if (validationError) {
             setError(validationError);
             return;
         }
-        
+
         setIsLoading(true);
-        
+
         const PORT = process.env.PORT || 5002;
 
-        axios.post(`${process.env.REACT_APP_BACKEND}/api/admin/add_doctor`, formData)
+        // axios.post(`${process.env.REACT_APP_BACKEND}/api/admin/add_doctor`, formData)
+        privateAxios.post('/api/admin/add_doctor', formData)
             .then((response) => {
                 if (response.data) {
                     setFormData({
@@ -72,7 +87,13 @@ function AddDoctor() {
             })
             .catch((error) => {
                 console.log(error);
-                setError(error.response?.data?.message || 'Error while adding a doctor');
+                if (error.response && error.response.status === 400 && error.response.data) {
+                    // Display the specific error message from the server
+                    setError(error.response.data);
+                } else {
+                    // Use the fallback message for other errors
+                    setError(error.response?.data?.message || 'Error while adding a doctor');
+                }
             })
             .finally(() => {
                 setIsLoading(false);
@@ -153,8 +174,8 @@ function AddDoctor() {
                                 <option value="Other">Other</option>
                             </select>
                         </div>
-                        <button 
-                            className="add-doctor-btn" 
+                        <button
+                            className="add-doctor-btn"
                             onClick={addDoctor}
                             disabled={isLoading}
                         >

@@ -1,4 +1,4 @@
-.patient-registration-container {
+.doctor-assigning-automatic-container {
   background-color: #fff;
   max-width: 600px;
   margin: 35px auto;
@@ -8,13 +8,13 @@
   font-family: 'Arial', sans-serif;
 }
 
-.patient-registration-title {
+.doctor-assigning-automatic-title {
   color: #333;
   text-align: center;
   margin-bottom: 25px;
 }
 
-.patient-registration-success-msg {
+.doctor-assigning-automatic-success-msg {
   background-color: #d4edda;
   color: #155724;
   padding: 10px;
@@ -24,7 +24,7 @@
   text-align: center;
 }
 
-.patient-registration-error-msg {
+.doctor-assigning-automatic-error-msg {
   background-color: #f8d7da;
   color: #721c24;
   padding: 10px;
@@ -34,24 +34,24 @@
   text-align: center;
 }
 
-.patient-registration-form {
+.doctor-assigning-automatic-form {
   max-width: 400px;
   margin: 0 auto;
 }
 
-.patient-registration-form-group {
+.doctor-assigning-automatic-form-group {
   margin-bottom: 15px;
 }
 
-.patient-registration-form-group label {
+.doctor-assigning-automatic-form-group label {
   display: block;
   margin-bottom: 3px;
   color: #333;
   font-weight: bold;
 }
 
-.patient-registration-form-group input[type="text"],
-.patient-registration-form-group input[type="number"] {
+.doctor-assigning-automatic-form-group input[type="number"],
+.doctor-assigning-automatic-form-group input[type="text"] {
   width: 100%;
   box-sizing: border-box;
   padding: 8px;
@@ -60,7 +60,7 @@
   font-size: 1rem;
 }
 
-.patient-registration-radio-group {
+.doctor-assigning-automatic-checkbox-group {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -69,18 +69,18 @@
   white-space: nowrap;
 }
 
-.patient-registration-radio-group label {
+.doctor-assigning-automatic-checkbox-group label {
   display: flex;
   align-items: center;
   font-weight: normal;
   white-space: nowrap;
 }
 
-.patient-registration-radio-group input[type="radio"] {
+.doctor-assigning-automatic-checkbox-group input[type="checkbox"] {
   margin-right: 5px;
 }
 
-.patient-registration-submit-btn {
+.doctor-assigning-automatic-submit-btn {
   width: 100%;
   background-color: #33b48b;
   color: #fff;
@@ -93,57 +93,41 @@
   margin-top: 15px;
 }
 
-.patient-registration-submit-btn:hover {
+.doctor-assigning-automatic-submit-btn:hover {
   background-color: #2a9d7a;
 }
 
 @media screen and (max-width: 600px) {
-  .patient-registration-container {
-    margin: 20px auto;
+  .doctor-assigning-automatic-container {
+    margin: 20px 10px;
     padding: 15px;
-    width: 90%;
   }
 
-  .patient-registration-title {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-  }
-
-  .patient-registration-form {
+  .doctor-assigning-automatic-form {
     max-width: 100%;
-    margin: 0 auto;
+    padding: 0 10px;
   }
 
-  .patient-registration-form-group {
-    margin-bottom: 12px;
-  }
-
-  .patient-registration-form-group label {
+  .doctor-assigning-automatic-form-group input[type="number"],
+  .doctor-assigning-automatic-form-group input[type="text"] {
     font-size: 1rem;
+    padding: 10px;
   }
 
-  .patient-registration-form-group input[type="text"],
-  .patient-registration-form-group input[type="number"] {
-    padding: 12px;
-    font-size: 1rem;
-  }
-
-  .patient-registration-radio-group {
-    margin-top: 8px;
-  }
-
-  .patient-registration-radio-group label {
-    font-size: 1rem;
-  }
-
-  .patient-registration-submit-btn {
-    padding: 12px;
-    font-size: 1rem;
-  }
-
-  .patient-registration-success-msg,
-  .patient-registration-error-msg {
+  .doctor-assigning-automatic-submit-btn {
     font-size: 1rem;
     padding: 12px;
+  }
+
+  .doctor-assigning-automatic-title {
+    font-size: 1.5rem;
+  }
+
+  .doctor-assigning-automatic-checkbox-group {
+    gap: 8px;
+  }
+
+  .doctor-assigning-automatic-checkbox-group label {
+    font-size: 1rem;
   }
 }
