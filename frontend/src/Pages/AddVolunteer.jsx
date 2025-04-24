@@ -105,6 +105,9 @@ const AddVolunteer = () => {
                         onChange={handleChange}
                         placeholder="Enter phone number"
                         required
+                        pattern="^(\d{10})?$"
+                        title="Phone number must be exactly 10 digits or empty"
+                        maxLength="10"
                     />
                 </div>
 
@@ -137,14 +140,14 @@ const AddVolunteer = () => {
                 </div>
 
                 <div className="add-volunteer-actions">
-                    <button
+                    {/* <button
                         type="button"
                         onClick={() => navigate('/dashboard-admin')}
                         className="add-volunteer-cancel"
                         disabled={isLoading}
                     >
                         Cancel
-                    </button>
+                    </button> */}
                     <button
                         type="submit"
                         className="add-volunteer-submit"
