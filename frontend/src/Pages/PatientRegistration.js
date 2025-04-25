@@ -337,7 +337,7 @@ function PatientRegistration() {
           </div>
           <div className="patient-registration-form-group">
             <label>
-              Old / New <span className="required">*</span>
+              Old / New <span className="required"></span>
             </label>
             <div className="patient-registration-radio-group">
               <label>
